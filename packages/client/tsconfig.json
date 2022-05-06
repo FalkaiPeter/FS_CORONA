@@ -14,6 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "baseUrl": "src"
   },
   "include": ["src", "./vite.config.ts"],
 }
