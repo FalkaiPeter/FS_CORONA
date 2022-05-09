@@ -6,12 +6,13 @@ type Corona = {
   recovered: number;
   quarantined: number;
   tested: number;
+  date: Date;
 };
 
 type CoronaState = {
   start: Date;
   end: Date;
-  data?: Corona;
+  data: Corona[];
 };
 
 type Store = {
