@@ -16,4 +16,4 @@ refreshRoute(app);
 intervalRoute(app);
 testRoute(app);
 
-app.listen(5000, () => console.log("listening..."));
+app.listen(process.env.PORT || 5000, () => console.log("listening..."));
