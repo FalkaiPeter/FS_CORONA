@@ -8,4 +8,4 @@ const handler: RequestHandler = async (req, res) => {
   res.status(200).send(process.env.DATABASE_URI);
 };
 
-export const refreshRoute = (app: Application) => app.get("/test", handler);
+export const testRoute = (app: Application) => app.get("/test", handler);

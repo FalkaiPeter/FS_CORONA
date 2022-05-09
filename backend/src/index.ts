@@ -2,7 +2,7 @@ import { connect, model } from "mongoose";
 import { config } from "dotenv";
 import { CoronaSchema } from "./schemas";
 import express from "express";
-import { intervalRoute, refreshRoute } from "./endpoints";
+import { intervalRoute, refreshRoute, testRoute } from "./endpoints";
 import cors from "cors";
 
 config();
@@ -14,5 +14,6 @@ app.use(cors());
 
 refreshRoute(app);
 intervalRoute(app);
+testRoute(app);
 
 app.listen(5000, () => console.log("listening..."));
