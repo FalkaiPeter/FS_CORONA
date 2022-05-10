@@ -13,11 +13,11 @@ const BarChart: FC = () => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar type="monotone" dataKey="infected" stroke="#f00" />
-      <Bar type="monotone" dataKey="deceased" stroke="#ff0" />
-      <Bar type="monotone" dataKey="recovered" stroke="#f0f" />
-      <Bar type="monotone" dataKey="quarantined" stroke="#0ff" />
-      <Bar type="monotone" dataKey="tested" stroke="#00f" />
+      <Bar type="monotone" dataKey="infected" fill="#f00" />
+      <Bar type="monotone" dataKey="deceased" fill="#ff0" />
+      <Bar type="monotone" dataKey="recovered" fill="#f0f" />
+      <Bar type="monotone" dataKey="quarantined" fill="#0ff" />
+      <Bar type="monotone" dataKey="tested" fill="#00f" />
     </Chart>
   );
 };
