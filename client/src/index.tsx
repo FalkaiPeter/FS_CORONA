@@ -13,8 +13,6 @@ const darkTheme = createTheme({
   },
 });
 
-console.log(process.env);
-
 const container = document.getElementById("root");
 if (container)
   createRoot(container).render(
