@@ -13,13 +13,15 @@ const darkTheme = createTheme({
   },
 });
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </Provider>
-  </StrictMode>
-);
+const container = document.getElementById("root");
+if (container)
+  createRoot(container).render(
+    <StrictMode>
+      <Provider store={store}>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </StrictMode>
+  );

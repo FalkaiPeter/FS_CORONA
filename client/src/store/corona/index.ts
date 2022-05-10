@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { startOfToday, startOfYesterday } from "date-fns";
 import { easyReducer } from "easy-ts-redux";
 import { put, select } from "redux-saga/effects";
@@ -11,7 +11,7 @@ const { actionWithPayload, reducer, watchers, action } = easyReducer<CoronaState
 
 export const refreshData = action({
   type: "REFRESH_DATA",
-  saga: function* (__reducerFnType) {
+  saga: function* () {
     yield axios.get(`${import.meta.env.VITE_DATABASE_URL}/refresh`);
     yield put(fetchData());
   },
@@ -22,8 +22,10 @@ export const fetchData = action({
   saga: function* (__reducerFnType) {
     const start = yield select(selectCoronaStart);
     const end = yield select(selectCoronaEnd);
-    const promise = yield axios.get(`${import.meta.env.VITE_DATABASE_URL}/interval/${start}/${end}`);
-    yield put({ type: __reducerFnType, payload: (promise as any).data });
+    const result: AxiosResponse<Corona[]> = (yield axios.get(
+      `${import.meta.env.VITE_DATABASE_URL}/interval/${start}/${end}`
+    )) as AxiosResponse<Corona[]>; // have to be casted somehow yield makes it unknown
+    yield put({ type: __reducerFnType, payload: result.data });
   },
   reducerFn: (state, payload: Corona[]) => {
     state.data = payload;
