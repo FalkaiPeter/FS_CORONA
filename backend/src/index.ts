@@ -7,7 +7,7 @@ import cors from "cors";
 
 config();
 model("corona", CoronaSchema);
-connect(process.env.DATABASE_URI!);
+if (process.env.DATABASE_URI) connect(process.env.DATABASE_URI);
 
 const app = express();
 app.use(cors());
