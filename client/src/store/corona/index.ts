@@ -4,6 +4,8 @@ import { easyReducer } from "easy-ts-redux";
 import { put, select } from "redux-saga/effects";
 import { selectCoronaEnd, selectCoronaStart } from "store/selectors";
 
+const API_URL = "https://fs-corona.herokuapp.com"; // cannot use .env variable heroku and vite not friends in this field
+
 const { actionWithPayload, reducer, watchers, action } = easyReducer<CoronaState>(
   { end: startOfToday(), start: startOfYesterday(), data: [] },
   "corona"
@@ -12,7 +14,7 @@ const { actionWithPayload, reducer, watchers, action } = easyReducer<CoronaState
 export const refreshData = action({
   type: "REFRESH_DATA",
   saga: function* () {
-    yield axios.get(`${import.meta.env.VITE_DATABASE_URL}/refresh`);
+    yield axios.get(`${API_URL}/refresh`);
     yield put(fetchData());
   },
 });
@@ -22,9 +24,9 @@ export const fetchData = action({
   saga: function* (__reducerFnType) {
     const start = yield select(selectCoronaStart);
     const end = yield select(selectCoronaEnd);
-    const result: AxiosResponse<Corona[]> = (yield axios.get(
-      `${import.meta.env.VITE_DATABASE_URL}/interval/${start}/${end}`
-    )) as AxiosResponse<Corona[]>; // have to be casted somehow yield makes it unknown
+    const result: AxiosResponse<Corona[]> = (yield axios.get(`${API_URL}/interval/${start}/${end}`)) as AxiosResponse<
+      Corona[]
+    >; // have to be casted somehow yield makes it unknown
     yield put({ type: __reducerFnType, payload: result.data });
   },
   reducerFn: (state, payload: Corona[]) => {
