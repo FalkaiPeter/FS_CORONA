@@ -26,7 +26,7 @@ const App: FC = () => {
         marginInline: "auto",
       }}>
       <h1>{t("title")}</h1>
-      <Button onClick={() => dispatch(refreshData())}>Refresh</Button>
+      <Button onClick={() => dispatch(refreshData())}>{t("refresh")}</Button>
       <Box sx={{ display: "grid", gap: "1rem", gridTemplateColumns: "1fr 1fr", width: "100%" }}>
         <DateField field="start" />
         <DateField field="end" />

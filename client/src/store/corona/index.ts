@@ -12,7 +12,7 @@ const { actionWithPayload, reducer, watchers, action } = easyReducer<CoronaState
 export const refreshData = action({
   type: "REFRESH_DATA",
   saga: function* (__reducerFnType) {
-    yield axios.get("https://fs-corona.herokuapp.com/refresh");
+    yield axios.get(`${import.meta.env.VITE_DATABASE_URL}/refresh`);
     yield put(fetchData());
   },
 });
@@ -22,7 +22,7 @@ export const fetchData = action({
   saga: function* (__reducerFnType) {
     const start = yield select(selectCoronaStart);
     const end = yield select(selectCoronaEnd);
-    const promise = yield axios.get(`https://fs-corona.herokuapp.com/interval/${start}/${end}`);
+    const promise = yield axios.get(`${import.meta.env.VITE_DATABASE_URL}/interval/${start}/${end}`);
     yield put({ type: __reducerFnType, payload: (promise as any).data });
   },
   reducerFn: (state, payload: Corona[]) => {
